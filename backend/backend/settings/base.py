@@ -31,7 +31,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # DRF
-    'rest_framework'
+    'rest_framework',
+    'users',
+    'orders',
+    'products'
 ]
 
 MIDDLEWARE = [
@@ -116,3 +119,5 @@ STATIC_URL = '/static/'
 
 
 APPEND_SLASH = False
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
