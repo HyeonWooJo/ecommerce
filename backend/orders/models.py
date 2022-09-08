@@ -27,7 +27,7 @@ class OrderDetail(models.Model):
     product_options = models.ForeignKey(ProductOption, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'orders'
+        db_table = 'orders_details'
 
     def __str__(self):
         return self.id
@@ -43,7 +43,7 @@ class Payment(TimeStampModel):
     order        = models.ForeignKey(Order, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'orders'
+        db_table = 'payment'
 
     def __str__(self):
         return self.id
