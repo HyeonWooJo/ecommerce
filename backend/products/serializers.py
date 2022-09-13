@@ -26,6 +26,7 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def get_image(self, obj):
+        """제품 내 모든 이미지 조회"""
         image = obj.productimage_set.all()
         return ProductImageSerializer(
                 instance=image, 
@@ -35,6 +36,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     @transaction.atomic
     def create(self, validated_data):
+        """제품 등록"""
         product = Product.objects.create(**validated_data)
         images = self.context['request'].FILES
         
@@ -59,3 +61,8 @@ class ProductSerializer(serializers.ModelSerializer):
         except KeyError as e:
             transaction.set_rollback(rollback=True)
             raise ValidationError(str(e))
+
+    def update(self, instance, validated_data):
+        """제품 수정"""
+        images = self.context["request"].FILES
+        return super().update(instance, validated_data)
