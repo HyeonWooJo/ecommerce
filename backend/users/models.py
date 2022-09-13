@@ -58,5 +58,8 @@ class User(AbstractUser):
 
     objects = UserManager()
 
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ["gender", "age"]
+
     class Meta:
         db_table = "users"
