@@ -1,68 +1,62 @@
-from django.db                     import models
-from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.db import models
 
-from core.models     import TimeStampModel
-from products.models import Product
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 
 class UserManager(BaseUserManager):
-    """유저매니저 정의"""
+    def create_user(self, username, gender, age, password=None):
+        if not username:
+            raise ValueError("계정 이름을 입력해주세요.")
+        if not password:
+            raise ValueError("비밀번호를 입력해주세요.")
+        if not gender:
+            raise ValueError("성별을 입력해주세요.")
+        if not age:
+            raise ValueError("나이를 입력해주세요.")
 
-    def create_user(self, email, password, **extra_fields):
-        if not email:
-            raise ValueError(("Users must have an email address"))
-        email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
+        user = self.model(
+            username = username,
+            password = password,
+            gender = gender,
+            age = age,
+        )
+
         user.set_password(password)
-        user.save()
+        user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password, **extra_fields):
-        extra_fields.setdefault("is_staff", True)
-        extra_fields.setdefault("is_superuser", True)
+    def create_superuser(self, username, gender, age, password=None):
+        user = self.create_user(
+            username = username,
+            password = password,
+            gender = gender,
+            age = age,
+        )
 
-        if extra_fields.get("is_staff") is not True:
-            raise ValueError(("Superuser must have is_staff=True."))
-        if extra_fields.get("is_superuser") is not True:
-            raise ValueError(("Superuser must have is_superuser=True."))
-        return self.create_user(email, password, **extra_fields)
+        user.is_staff = True
+        user.is_superuser = True
+
+        user.save(using=self._db)
+        return user
 
 
-class User(AbstractBaseUser, TimeStampModel):
-    """
-    유저 모델
-    """
-    email    = models.EmailField(max_length=120)
-    username = models.CharField(max_length=50)
-    address  = models.CharField(max_length=120)
-    is_staff = models.BooleanField(("Is staff"), default=False)
+class User(AbstractUser):
+    username = models.CharField(verbose_name="ID", max_length=20, unique=True)
+    name = models.CharField(verbose_name="이름", max_length=15)
+    gender = models.BooleanField(verbose_name="성별", default=True)
+    age = models.PositiveIntegerField(verbose_name="나이")
+    date_joined = models.DateTimeField(auto_now_add=True)
 
-    objects         = UserManager()
-    USERNAME_FIELD  = "email"
-    EMAIL_FIELD     = "email"
-    REQUIRED_FIELDS = []
+    # status
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+
+    # except
+    first_name = None
+    last_name = None
+    email = None
+
+    objects = UserManager()
 
     class Meta:
-        verbose_name        = ("user")
-        verbose_name_plural = ("users")
-        db_table            = "users"
-
-    def clean(self):
-        super().clean()
-        self.email = self.__class__.objects.normalize_email(self.email)
-
-
-
-class Comment(TimeStampModel):
-    """
-    댓글 모델
-    """
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    user    = models.ForeignKey(User, on_delete=models.CASCADE)
-    comment = models.CharField(max_length=200)
-    
-    class Meta:
-        db_table = 'comments'
-
-    def __str__(self):
-        return self.product
+        db_table = "users"

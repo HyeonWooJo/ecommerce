@@ -31,12 +31,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # DRF
-    'rest_framework',
     'users',
-    'orders',
-    'products',
-    'rest_framework_simplejwt',
+    # 'orders',
+    # 'products',
+    # DRF
+    "rest_framework",
+    "rest_framework.authtoken",
+    # django-rest-auth
+    "rest_framework_simplejwt",
 ]
 
 MIDDLEWARE = [
@@ -46,8 +48,7 @@ MIDDLEWARE = [
     # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'rest_framework_simplejwt.authentication.JWTAuthentication',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -127,6 +128,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
 # Simple JWT
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
+
+
+
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
@@ -158,3 +167,5 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+AUTH_USER_MODEL = 'users.User'
