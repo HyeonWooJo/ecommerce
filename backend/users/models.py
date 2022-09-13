@@ -1,55 +1,56 @@
+from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.utils.translation import gettext_lazy as _
 
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from core.models import TimeStampModel
+
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, address, username, password=None):
+    """유저매니저 정의"""
+
+    def create_user(self, email, password, **extra_fields):
         if not email:
-            raise ValueError("계정 이메일을 입력해주세요.")
-        if not password:
-            raise ValueError("비밀번호를 입력해주세요.")
-        if not username:
-            raise ValueError("유저이름을 입력해주세요.")
-        if not address:
-            raise ValueError("주소를 입력해주세요.")
-
-        user = self.model(
-            email = email,
-            password = password,
-            username = username,
-            address = address
-        )
-
+            raise ValueError(_("The Email must be set"))
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
-        user.save(using=self._db)
+        user.save()
         return user
 
-    def create_superuser(self, email, username, address, password=None):
-        user = self.create_user(
-            email = email,
-            password = password,
-            username = username,
-            address = address
-        )
+    def create_superuser(self, email, password, **extra_fields):
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+        # extra_fields.setdefault('is_active', True)
 
-        user.is_staff = True
-        user.is_superuser = True
-
-        user.save(using=self._db)
-        return user
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError(_("Superuser must have is_staff=True."))
+        if extra_fields.get("is_superuser") is not True:
+            raise ValueError(_("Superuser must have is_superuser=True."))
+        return self.create_user(email, password, **extra_fields)
 
 
-class User(AbstractUser):
-    email = models.CharField(max_length=120, unique=True)
-    address = models.CharField(max_length=100)
-    username = models.CharField(max_length=100)
+class User(AbstractBaseUser, PermissionsMixin, TimeStampModel):
+    """유저 모델"""
 
-    # status
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
+    username = models.CharField(
+        _("username"), max_length=45, null=True
+    )
+    email = models.EmailField(_("email_address"), unique=True)
+    is_staff = models.BooleanField(_("Is staff"), default=False)
 
     objects = UserManager()
+    USERNAME_FIELD = "email"
+    EMAIL_FIELD = "email"
+    REQUIRED_FIELDS = []
 
     class Meta:
+        verbose_name = _("user")
+        verbose_name_plural = _("users")
         db_table = "users"
+
+    def clean(self):
+        super().clean()
+        self.email = self.__class__.objects.normalize_email(self.email)

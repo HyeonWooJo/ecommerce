@@ -34,8 +34,8 @@ INSTALLED_APPS = [
     # DRF
     'rest_framework',
     'users',
-    'orders',
-    'products',
+    # 'orders',
+    # 'products',
     'rest_framework_simplejwt',
 ]
 
@@ -158,3 +158,5 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+AUTH_USER_MODEL = 'users.User'
