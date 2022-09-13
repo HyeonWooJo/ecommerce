@@ -16,7 +16,13 @@ from .serializers import SignInSerializer
 
 
 class SignInView(APIView):
-
+    """
+    로그인 API
+    :endpoint: /api/users/signgin
+    :return: 로그인 성공여부
+            access token
+            refresh token
+    """
     permission_classes = [AllowAny]
 
     def post(self, request):
@@ -39,6 +45,14 @@ class SignInView(APIView):
 
 
 class RegisterAPIView(CreateAPIView):
+    """
+    회원가입 API
+    :endpoint: /api/users/register
+    :return: username
+            gender
+            age
+            id
+    """
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
 
@@ -53,4 +67,9 @@ class RegisterAPIView(CreateAPIView):
 
 
 class DeleteUserView(DestroyAPIView):
+    """
+    계정 삭제 API
+    :endpoint: /api/users/delete/<int>
+    :return: 없음
+    """
     queryset = get_user_model().objects.all()
