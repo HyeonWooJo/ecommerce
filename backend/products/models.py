@@ -11,7 +11,7 @@ class Product(TimeStampModel):
     price   = models.DecimalField(max_digits=8, decimal_places=2)
     content = models.TextField()
     origin  = models.CharField(max_length=40)
-    quantiy = models.IntegerField()
+    quantity = models.IntegerField()
     
     class Meta:
         db_table = 'products'

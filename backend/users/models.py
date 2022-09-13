@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 
 class UserManager(BaseUserManager):
+    "유저 매니저 정의"
     def create_user(self, username, gender, age, password=None):
         if not username:
             raise ValueError("계정 이름을 입력해주세요.")
@@ -41,6 +42,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    """유저 모델"""
     username = models.CharField(verbose_name="ID", max_length=20, unique=True)
     name = models.CharField(verbose_name="이름", max_length=15)
     gender = models.BooleanField(verbose_name="성별", default=True)

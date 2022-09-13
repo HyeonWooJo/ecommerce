@@ -58,7 +58,6 @@ class RegisterAPIView(CreateAPIView):
 
     def post(self, request):
         user = request.data
-
         serializer = self.serializer_class(data=user)
         serializer.is_valid(raise_exception=True)
         serializer.save()
