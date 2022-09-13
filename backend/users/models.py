@@ -10,7 +10,7 @@ class UserManager(BaseUserManager):
 
     def create_user(self, email, password, **extra_fields):
         if not email:
-            raise ValueError(_("Users must have an email address"))
+            raise ValueError(("Users must have an email address"))
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -22,9 +22,9 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault("is_superuser", True)
 
         if extra_fields.get("is_staff") is not True:
-            raise ValueError(_("Superuser must have is_staff=True."))
+            raise ValueError(("Superuser must have is_staff=True."))
         if extra_fields.get("is_superuser") is not True:
-            raise ValueError(_("Superuser must have is_superuser=True."))
+            raise ValueError(("Superuser must have is_superuser=True."))
         return self.create_user(email, password, **extra_fields)
 
 
@@ -35,7 +35,7 @@ class User(AbstractBaseUser, TimeStampModel):
     email    = models.EmailField(max_length=120)
     username = models.CharField(max_length=50)
     address  = models.CharField(max_length=120)
-    is_staff = models.BooleanField(_("Is staff"), default=False)
+    is_staff = models.BooleanField(("Is staff"), default=False)
 
     objects         = UserManager()
     USERNAME_FIELD  = "email"
@@ -43,8 +43,8 @@ class User(AbstractBaseUser, TimeStampModel):
     REQUIRED_FIELDS = []
 
     class Meta:
-        verbose_name        = _("user")
-        verbose_name_plural = _("users")
+        verbose_name        = ("user")
+        verbose_name_plural = ("users")
         db_table            = "users"
 
     def clean(self):

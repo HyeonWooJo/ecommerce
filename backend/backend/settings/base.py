@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'users',
     'orders',
     'products',
-    'simple-jwt'
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
