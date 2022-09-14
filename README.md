@@ -108,12 +108,12 @@ Language | Framwork | Database | HTTP | Tools
 |----------|-------------|------|---------------------------------------------------------------------------------------------------------------------|---------------|
 | /api/users/register/  | POST   | 회원가입 |  username: string <br/> password: string <br/> age: string | 유저 정보 |
 | /api/users/signin/  | POST     | 로그인  | sername: string <br/> password: string  | 성공 여부 메시지 / access_token / refresh_token  |
-| /api/users/delete/:<int>/  | DELETE   | 계정 삭제 |  없음  | 계정 삭제 성공 여부 |
+| /api/users/delete/:int:/  | DELETE   | 계정 삭제 |  없음  | 계정 삭제 성공 여부 |
 | /api/products/mixin/post/ | POST   | 제품 생성 |  name: string <br/> price: int<br/> content: string <br/> origin: string <br/> quantity: int <br/> mainimage: image <br/> image: image  | 제품 상세 |
 | /api/products/mixin/post/  | GET   | 제품 리스트 조회 |  없음  | 제품 리스트 |
-| /api/products/mixin/post/:<int>/  | GET   | 제품 상세 조회 |  없음  | 제품 상세 |
-| /api/products/mixin/post/:<int>/  | PUT   | 제품 상세 수정 |  없음  | 제품 상세 |
-| /api/products/mixin/post/:<int>/  | DELETE   | 제품 삭제 |  없음  | 제품 삭제 성공 여부 |
+| /api/products/mixin/post/:int:/  | GET   | 제품 상세 조회 |  없음  | 제품 상세 |
+| /api/products/mixin/post/:int:/  | PUT   | 제품 상세 수정 |  없음  | 제품 상세 |
+| /api/products/mixin/post/:int:/  | DELETE   | 제품 삭제 |  없음  | 제품 삭제 성공 여부 |
 | /api/orders/  | POST   | 주문 생성 |  user: int  | 주문 상세 |
 | /api/orders/  | GET   | 주문 리스트 조회 |  없음  | 주문 리스트 |
 | /api/orders/:<int>/  | GET   | 주문 상세 조회 |  없음  | 주문 상세 |
@@ -121,14 +121,14 @@ Language | Framwork | Database | HTTP | Tools
 | /api/orders/:<int>/  | DELETE   | 주문 상세 삭제 |  없음  | 주문 상세 |
 | /api/orders/detail/  | POST   | 상세 주문 생성 |  user: int  | 상세 주문 상세 |
 | /api/orders/detail/  | GET   | 상세 주문 리스트 조회 |  없음  | 상세 주문 리스트 |
-| /api/orders/detail/:<int>/  | GET   | 상세 주문 상세 조회 |  없음  | 상세 주문 상세 |
-| /api/orders/detail/:<int>/  | PUT   | 상세 주문 상세 수정 |  없음  | 상세 주문 상세 |
-| /api/orders/detail/:<int>/  | DELETE   | 상세 주문 상세 삭제 |  없음  | 상세 주문 상세 |
+| /api/orders/detail/:int:/  | GET   | 상세 주문 상세 조회 |  없음  | 상세 주문 상세 |
+| /api/orders/detail/:int:/  | PUT   | 상세 주문 상세 수정 |  없음  | 상세 주문 상세 |
+| /api/orders/detail/:int:/  | DELETE   | 상세 주문 상세 삭제 |  없음  | 상세 주문 상세 |
 | /api/orders/payment/  | POST   | 결제 생성 |  user: int  | 결제 상세 |
 | /api/orders/payment/  | GET   | 결제 리스트 조회 |  없음  | 결제 리스트 |
-| /api/orders/payment/:<int>/  | GET   | 결제 상세 조회 |  없음  | 결제 상세 |
-| /api/orders/payment/:<int>/  | PUT   | 결제 상세 수정 |  없음  | 결제 상세 |
-| /api/orders/payment/:<int>/  | DELETE   | 결제 상세 삭제 |  없음  | 결제 상세 |
+| /api/orders/payment/:int:/  | GET   | 결제 상세 조회 |  없음  | 결제 상세 |
+| /api/orders/payment/:int:/  | PUT   | 결제 상세 수정 |  없음  | 결제 상세 |
+| /api/orders/payment/:int:/  | DELETE   | 결제 상세 삭제 |  없음  | 결제 상세 |
 
 <br>
 
