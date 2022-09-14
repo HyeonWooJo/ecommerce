@@ -1,12 +1,8 @@
 from django.db import models
 
-# Create your models here.
-from django.db import models
-
 from core.models     import TimeStampModel
 from users.models    import User
 from products.models import ProductOption
-
 
 
 class Order(TimeStampModel):
@@ -42,8 +38,8 @@ class Payment(TimeStampModel):
     """
     결제 모델
     """
-    method       = models.PositiveIntegerField()
-    amount       = models.DecimalField(max_digits=8, decimal_places=2)
+    method       = models.CharField(max_length=80)
+    amount       = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     deposit_bank = models.CharField(max_length=120)
     order        = models.ForeignKey(Order, on_delete=models.CASCADE)
 
