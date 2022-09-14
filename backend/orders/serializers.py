@@ -24,6 +24,26 @@ class OrderDetailSerializer(serializers.ModelSerializer):
 
         return order_detail
 
+    def update(self, instance, validated_data):
+        instance.product_count  = validated_data['product_count']
+        instance.product_option = validated_data['product_option']
+        instance.save()
+
+        order         = Order.objects.get(id=instance.order.id)
+        order_details = OrderDetail.objects.filter(order=order)
+        order.total_price = 0
+        
+        for order_detail in order_details:
+            option_price  = order_detail.product_option.option_price
+            product_count = order_detail.product_count
+            total_price   = option_price * product_count
+
+            order.total_price += total_price
+        
+        order.save()
+
+        return order_detail
+
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
