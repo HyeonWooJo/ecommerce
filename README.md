@@ -135,7 +135,7 @@ Language | Framwork | Database | HTTP | Tools
 ---
 
 # 5. ERD
-![](https://user-images.githubusercontent.com/65996045/188566128-49665194-0e28-4d1c-891f-e2a7ad382aec.png)
+![](https://user-images.githubusercontent.com/65996045/190115818-72ead3fd-ac7d-47e9-a1a9-73c590a362fc.png)
 
 <br>
 
