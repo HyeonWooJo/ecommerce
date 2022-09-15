@@ -116,9 +116,9 @@ Language | Framwork | Database | HTTP | Tools
 | /api/products/mixin/post/:int:/  | DELETE   | 제품 삭제 |  없음  | 제품 삭제 성공 여부 |
 | /api/orders/  | POST   | 주문 생성 |  user: int  | 주문 상세 |
 | /api/orders/  | GET   | 주문 리스트 조회 |  없음  | 주문 리스트 |
-| /api/orders/:<int>/  | GET   | 주문 상세 조회 |  없음  | 주문 상세 |
-| /api/orders/:<int>/  | PUT   | 주문 상세 수정 |  없음  | 주문 상세 |
-| /api/orders/:<int>/  | DELETE   | 주문 상세 삭제 |  없음  | 주문 상세 |
+| /api/orders/:int:/  | GET   | 주문 상세 조회 |  없음  | 주문 상세 |
+| /api/orders/:int:/  | PUT   | 주문 상세 수정 |  없음  | 주문 상세 |
+| /api/orders/:int:/  | DELETE   | 주문 상세 삭제 |  없음  | 주문 상세 |
 | /api/orders/detail/  | POST   | 상세 주문 생성 |  user: int  | 상세 주문 상세 |
 | /api/orders/detail/  | GET   | 상세 주문 리스트 조회 |  없음  | 상세 주문 리스트 |
 | /api/orders/detail/:int:/  | GET   | 상세 주문 상세 조회 |  없음  | 상세 주문 상세 |
