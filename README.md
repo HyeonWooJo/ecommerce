@@ -107,7 +107,7 @@ Language | Framwork | Database | HTTP | Tools
 | endpoint | HTTP Method | 기능   | require parameter                                                                                                   | response data |
 |----------|-------------|------|---------------------------------------------------------------------------------------------------------------------|---------------|
 | /api/users/register/  | POST   | 회원가입 |  username: string <br/> password: string <br/> age: string | 유저 정보 |
-| /api/users/signin/  | POST     | 로그인  | sername: string <br/> password: string  | 성공 여부 메시지 / access_token / refresh_token  |
+| /api/users/signin/  | POST     | 로그인  | sername: string <br/> password: string  | 성공 여부 메시지 <br/> access_token <br/> refresh_token  |
 | /api/users/delete/:int:/  | DELETE   | 계정 삭제 |  없음  | 계정 삭제 성공 여부 |
 | /api/products/mixin/post/ | POST   | 제품 생성 |  name: string <br/> price: int<br/> content: string <br/> origin: string <br/> quantity: int <br/> mainimage: image <br/> image: image  | 제품 상세 |
 | /api/products/mixin/post/  | GET   | 제품 리스트 조회 |  없음  | 제품 리스트 |
